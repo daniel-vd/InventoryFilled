@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,22 +32,13 @@ public class MobKill implements Listener{
 	private static ArrayList<String> messageAlert4 = new ArrayList<String>();
 	
 	@EventHandler
-	public void onEntityDeath(EntityDamageByEntityEvent e){
-        Entity entity = e.getEntity();
+	public void onEntityDeath(EntityDeathEvent e){
+        LivingEntity entity = e.getEntity();
         
-        if (!(e.getDamager() instanceof Player)) {
+        if (!(entity.getKiller() instanceof Player)) {
         	return;
         }
-        
-        if (e.getCause() != DamageCause.ENTITY_ATTACK) {
-        	return;
-        }
-		
-		if (!(e.getDamager() instanceof Player)) {
-			return;
-		}
-
-    	Player killer = (Player) e.getDamager();
+    	Player killer = (Player) entity.getKiller();
         UUID uuid = killer.getUniqueId();
         
         ItemStack[] contents = killer.getInventory().getContents();
@@ -127,12 +119,12 @@ public class MobKill implements Listener{
         
         
 		if(entity.getLastDamageCause() instanceof EntityDamageByEntityEvent){ //the dead thing was killed by an entity
-            if(e.getDamager() instanceof Player){ //the killer was a player
+            if(entity.getKiller() instanceof Player){ //the killer was a player
                 if (killer.hasPermission("InventoryFilled.alert")) {
         		if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
         		if (!killer.getGameMode().equals(GameMode.CREATIVE)) {
                 if (killer.getInventory().firstEmpty() == -1){
-    	            for(ItemStack item : ((EntityDeathEvent) e.getEntity()).getDrops()){
+    	            for(ItemStack item : (e.getDrops())) {
     	                for (int i=0; i<35; i++) {
     	                    if (killer.getInventory().getItem(i).getAmount()+item.getAmount()<=64) {
     	                        if (killer.getInventory().getItem(i).getType().equals(item.getType())) {
