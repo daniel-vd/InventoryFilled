@@ -126,6 +126,9 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 			if (!config.contains("Default-Alert-State")) {
 				config.set("Default-Alert-State", true);
 			}
+			if (!config.contains("Particle-Effect.Enabled")) {
+				config.set("Particle-Effect.Enabled", true);
+			}
 			if (!config.contains("Inventory-Part-Alert.Alert1.Enabled")) {
 				config.set("Inventory-Part-Alert.Alert1.Enabled", true);
 			}

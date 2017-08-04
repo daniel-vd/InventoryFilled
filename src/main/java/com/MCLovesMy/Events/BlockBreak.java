@@ -1,12 +1,15 @@
 package com.MCLovesMy.Events;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +17,10 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.MCLovesMy.InventoryFilled;
+
+import net.minecraft.server.v1_12_R1.EnumParticle;
+import net.minecraft.server.v1_12_R1.Packet;
+import net.minecraft.server.v1_12_R1.PacketPlayOutWorldParticles;
 
 public class BlockBreak implements Listener{
 	
@@ -28,6 +35,7 @@ public class BlockBreak implements Listener{
 	private static ArrayList<String> messageAlert4 = new ArrayList<String>();
 		
 		//BlockBreak event
+		@SuppressWarnings("deprecation")
 		@EventHandler
 	    public void BlockBreakEvent(BlockBreakEvent e) {
 			Player p = e.getPlayer();
@@ -120,6 +128,21 @@ public class BlockBreak implements Listener{
 	                        }
 	                    }
 	                    if (i==34) {
+	                    	
+	                    	if (plugin.config.getBoolean("Particle-Effect.Enabled")) {
+		                    		
+		                        Location loc = e.getBlock().getLocation();
+		                        int radius = (int) 0.5;
+		                        for(double y = 0; y <= 2; y+=0.05) {
+		                            double x = radius * Math.cos(y);
+		                            double z = radius * Math.sin(y);
+		                            @SuppressWarnings("rawtypes")
+									Packet packet = new PacketPlayOutWorldParticles(EnumParticle.FIREWORKS_SPARK, true, (float) (loc.getX() + (x + 0.5)), (float) (loc.getY() + y), (float) (loc.getZ() + (z + 0.5)), 0, 0, 0, 0, 1, null);
+		    
+		                                ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+	                            }
+	                        }
+	                    	
 	                    	if(plugin.config.getBoolean("Chat-Alert.Enabled")) 
 	                        p.sendMessage(ChatColor.RED + plugin.messages.getString("Actions.BlockBreak.Chat-Alert-Message"));
 	                    	if (plugin.config.getBoolean("Title-Alert.Enabled")) {
@@ -136,6 +159,9 @@ public class BlockBreak implements Listener{
 	                    		return;
 	                    	}
 	                    	}
+	                    
+	                    
+	                    
 	                    }
 	                }
 	            }
@@ -143,5 +169,22 @@ public class BlockBreak implements Listener{
 			}
 	    }
 	}
+		
+		public EnumParticle randParticle() {
+	        Random r = new Random();
+	        int rNumb = r.nextInt(5) + 1;
+	        if(rNumb == 1)
+	            return EnumParticle.FIREWORKS_SPARK;
+	        else if(rNumb == 2)
+	            return EnumParticle.VILLAGER_HAPPY;
+	        else if(rNumb == 3)
+	            return EnumParticle.SPELL_WITCH;
+	        else if(rNumb == 4)
+	            return EnumParticle.FLAME;
+	        else if(rNumb == 5) {
+	            return EnumParticle.BLOCK_CRACK;
+	        }
+	        return EnumParticle.FLAME;
+	    }
 		
 }
