@@ -35,7 +35,6 @@ public class BlockBreak implements Listener{
 	private static ArrayList<String> messageAlert4 = new ArrayList<String>();
 		
 		//BlockBreak event
-		@SuppressWarnings("deprecation")
 		@EventHandler
 	    public void BlockBreakEvent(BlockBreakEvent e) {
 			Player p = e.getPlayer();

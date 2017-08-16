@@ -35,6 +35,13 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 	    
 	    
 		public void onEnable() {
+			
+			if (!Bukkit.getVersion().contains("1.12")) {
+				console.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This InventoryFilled version is NOT "
+						+ "compatible with this Spigot version! You can request the right InventoryFilled "
+						+ "version by contacting the author!");
+			}
+			
 			getCommand("inventoryfilled").setExecutor(new MainCommand(this));
 			getCommand("if").setExecutor(new MainCommand(this));
 			registerEvents(this, new BlockBreak(this), new MobKill(this), new Join(this));
@@ -85,6 +92,9 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 					+ "If false, players won't get alerts by default. (So they have to do /if on if the want alerts)\n"
 					+ "Default-Alert-State: true"
 					+ "\n\n"
+					+ "Enable or disable particle alerts\n"
+					+ "Particle-Effect:\n"
+					+ "Enabled: true\n\n"
 					+ "Change which sound will be played when a full inventory.\n"
 					+ "For a list of sounds please see: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html\n"
 					+ "Sound-Alert-Sound: ENTITY_GHAST_HURT"
