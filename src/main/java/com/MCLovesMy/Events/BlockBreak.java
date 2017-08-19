@@ -17,6 +17,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.MCLovesMy.InventoryFilled;
+import com.MCLovesMy.Events.utils.PartiallyFilled;
 
 import net.minecraft.server.v1_12_R1.EnumParticle;
 import net.minecraft.server.v1_12_R1.Packet;
@@ -39,13 +40,13 @@ public class BlockBreak implements Listener{
 	    public void BlockBreakEvent(BlockBreakEvent e) {
 			Player p = e.getPlayer();
 			UUID uuid = p.getUniqueId();
-			Location playerLoc = p.getLocation();
-			ItemStack[] contents = p.getInventory().getContents();
+			Location playerLoc = p.getLocation(); //For sound effect
+			ItemStack[] contents = p.getInventory().getStorageContents();
 			
 			int count = 0;
 			for (int i = 0; i < contents.length; i++) {
 			    if (contents[i] == null)
-			        count++;
+			        count++; //Empty slot
 			}
 			
 			double invPercent = (100. / 36);
@@ -147,7 +148,6 @@ public class BlockBreak implements Listener{
 	                    	if (plugin.config.getBoolean("Title-Alert.Enabled")) {
 	                    		
 	                    		p.sendTitle(ChatColor.RED + plugin.messages.getString("Actions.BlockBreak.Title-Alert-Message"), ChatColor.BLUE + plugin.messages.getString("Actions.BlockBreak.SubTitle-Alert-Message"), 5, 30, 15);
-	                    		
 	                    
 	                    		}
 	                    	if (plugin.config.getBoolean("Sound-Alert.Enabled")) {

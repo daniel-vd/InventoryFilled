@@ -41,7 +41,7 @@ public class MobKill implements Listener{
     	Player killer = (Player) entity.getKiller();
         UUID uuid = killer.getUniqueId();
         
-        ItemStack[] contents = killer.getInventory().getContents();
+        ItemStack[] contents = killer.getInventory().getStorageContents();
 		
 		int count = 0;
 		for (int i = 0; i < contents.length; i++) {
