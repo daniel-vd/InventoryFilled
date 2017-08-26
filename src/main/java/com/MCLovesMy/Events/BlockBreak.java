@@ -128,6 +128,10 @@ public class BlockBreak implements Listener{
 	                        }
 	                    }
 	                    if (i==34) {
+	            	        
+	            	        if (plugin.config.getBoolean("Disable-Block-Break-When-Full-Inv") == true) {
+	            	        	e.setCancelled(true);
+	            	        }
 	                    	
 	                    	if (plugin.config.getBoolean("Particle-Effect.Enabled")) {
 		                    		
