@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.MCLovesMy.InventoryFilled;
+import com.MCLovesMy.utils.InventorySpace;
 
 public class MobKill implements Listener{
 	
@@ -121,18 +122,9 @@ public class MobKill implements Listener{
 		if(entity.getLastDamageCause() instanceof EntityDamageByEntityEvent){ //the dead thing was killed by an entity
             if(entity.getKiller() instanceof Player){ //the killer was a player
                 if (killer.hasPermission("InventoryFilled.alert")) {
-        		if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
-        		if (!killer.getGameMode().equals(GameMode.CREATIVE)) {
-                if (killer.getInventory().firstEmpty() == -1){
-    	            for(ItemStack item : (e.getDrops())) {
-    	                for (int i=0; i<35; i++) {
-    	                    if (killer.getInventory().getItem(i).getAmount()+item.getAmount()<=64) {
-    	                        if (killer.getInventory().getItem(i).getType().equals(item.getType())) {
-    	                       
-    	                            break;
-    	                        }
-    	                    }
-    	                    if (i==34) {
+                	if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
+                		if (!killer.getGameMode().equals(GameMode.CREATIVE)) {
+    	                    if (!InventorySpace.itemFits(killer, e.getDrops())) {
     	                    	if(plugin.config.getBoolean("Chat-Alert.Enabled")) {
     	                        killer.sendMessage(ChatColor.RED + plugin.messages.getString("Actions.MobKill.Chat-Alert-Message"));
     	                        return;
@@ -141,10 +133,7 @@ public class MobKill implements Listener{
     		                   	}
     	                    }
     	                }
-    		                    }
-    	                    }
-    	                }
-    	            }
+                	}
                 }
             }
 		}

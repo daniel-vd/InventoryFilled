@@ -17,7 +17,8 @@ import com.MCLovesMy.Commands.MainCommand;
 import com.MCLovesMy.Events.BlockBreak;
 import com.MCLovesMy.Events.MobKill;
 import com.MCLovesMy.Events.PlayerData.Join;
-import com.MCLovesMy.Updaters.Updater;
+import com.MCLovesMy.utils.Metrics;
+import com.MCLovesMy.utils.Updater;
 
 public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 
@@ -95,7 +96,9 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 					+ "Enable or disable particle alerts\n"
 					+ "Particle-Effect:\n"
 					+ "Enabled: true\n\n"
-					+ "Change which sound will be played when a full inventory.\n"
+					+ "Choose whether a player should be able to break blocks when their inventory is full.\n"
+					+ "Disable-Block-Break-When-Full-Inv: false\n\n"
+					+ "Change what sound will be played when a full inventory.\n"
 					+ "For a list of sounds please see: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html\n"
 					+ "Sound-Alert-Sound: ENTITY_GHAST_HURT"
 					+ "\n\n"
@@ -132,12 +135,14 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 			if (!config.contains("Sound-Alert.Sound")) {
 				config.set("Sound-Alert.Sound", "ENTITY_GHAST_HURT");
 			}
-			config.set("Sound-Alert-Sound", null);
 			if (!config.contains("Default-Alert-State")) {
 				config.set("Default-Alert-State", true);
 			}
 			if (!config.contains("Particle-Effect.Enabled")) {
 				config.set("Particle-Effect.Enabled", true);
+			}
+			if (!config.contains("Disable-Block-Break-When-Full-Inv")) {
+				config.set("Disable-Block-Break-When-Full-Inv", false);
 			}
 			if (!config.contains("Inventory-Part-Alert.Alert1.Enabled")) {
 				config.set("Inventory-Part-Alert.Alert1.Enabled", true);
