@@ -8,9 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import com.MCLovesMy.utils.InventorySpace;
 
 /**
- * <h2>InventoryFilled API</h2>
- * <p>Allows to check for full inventories and InventoryFilled events.</p>
- * 
+ * InventoryFilled API
+ * Allows to check for full inventories and InventoryFilled events.
  * 
  * @author Github/daniel-vd
  *
