@@ -1,4 +1,4 @@
-package com.MCLovesMy;
+package com.MCLovesMy.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

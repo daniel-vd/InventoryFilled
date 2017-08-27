@@ -1,4 +1,4 @@
-package com.MCLovesMy.Updaters;
+package com.MCLovesMy.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -17,7 +17,8 @@ import com.MCLovesMy.Commands.MainCommand;
 import com.MCLovesMy.Events.BlockBreak;
 import com.MCLovesMy.Events.MobKill;
 import com.MCLovesMy.Events.PlayerData.Join;
-import com.MCLovesMy.Updaters.Updater;
+import com.MCLovesMy.utils.Metrics;
+import com.MCLovesMy.utils.Updater;
 
 public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 
