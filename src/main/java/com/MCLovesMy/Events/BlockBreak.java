@@ -17,7 +17,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.MCLovesMy.InventoryFilled;
-import com.MCLovesMy.Events.utils.PartiallyFilled;
+import com.MCLovesMy.utils.InventorySpace;
 
 import net.minecraft.server.v1_12_R1.EnumParticle;
 import net.minecraft.server.v1_12_R1.Packet;
@@ -116,18 +116,9 @@ public class BlockBreak implements Listener{
 	        }
 	        
 	        if (p.hasPermission("InventoryFilled.alert")) {
-			if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
-			if (!p.getGameMode().equals(GameMode.CREATIVE)) {
-	        if (p.getInventory().firstEmpty() == -1){
-	            for(ItemStack item : e.getBlock().getDrops()){
-	                for (int i=0; i<35; i++) {
-	                    if (p.getInventory().getItem(i).getAmount()+item.getAmount()<=64) {
-	                        if (p.getInventory().getItem(i).getType().equals(item.getType())) {
-	                       
-	                            break;
-	                        }
-	                    }
-	                    if (i==34) {
+	        	if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
+	        		if (!p.getGameMode().equals(GameMode.CREATIVE)) {
+	                    if (!InventorySpace.itemFits(p, e.getBlock().getDrops())) {
 	            	        
 	            	        if (plugin.config.getBoolean("Disable-Block-Break-When-Full-Inv") == true) {
 	            	        	e.setCancelled(true);
@@ -161,17 +152,11 @@ public class BlockBreak implements Listener{
 	                    	} else {
 	                    		return;
 	                    	}
-	                    	}
-	                    
-	                    
-	                    
 	                    }
-	                }
-	            }
+	        		}
+	        	}
 	        }
-			}
-	    }
-	}
+		}
 		
 		public EnumParticle randParticle() {
 	        Random r = new Random();
