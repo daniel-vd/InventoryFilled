@@ -36,13 +36,6 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 	    
 	    
 		public void onEnable() {
-			
-			if (!Bukkit.getVersion().contains("1.12")) {
-				console.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "This InventoryFilled version is NOT "
-						+ "compatible with this Spigot version! You can request the right InventoryFilled "
-						+ "version by contacting the author!");
-			}
-			
 			getCommand("inventoryfilled").setExecutor(new MainCommand(this));
 			getCommand("if").setExecutor(new MainCommand(this));
 			registerEvents(this, new BlockBreak(this), new MobKill(this), new Join(this));
