@@ -3,6 +3,7 @@ package com.MCLovesMy.Events;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -18,6 +19,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.MCLovesMy.InventoryFilled;
+import com.MCLovesMy.api.PlayerReceiveAlertEvent;
 import com.MCLovesMy.utils.InventorySpace;
 
 public class MobKill implements Listener{
@@ -125,7 +127,17 @@ public class MobKill implements Listener{
                 	if (plugin.playerdata.getBoolean("Players." + uuid + ".Alerts") == true) {
                 		if (!killer.getGameMode().equals(GameMode.CREATIVE)) {
     	                    if (!InventorySpace.itemFits(killer, e.getDrops())) {
+    	                    	
     	                    	if(plugin.config.getBoolean("Chat-Alert.Enabled")) {
+    	                    		
+    		                    	PlayerReceiveAlertEvent event = new PlayerReceiveAlertEvent(killer);
+    		                    	
+    		                    	Bukkit.getServer().getPluginManager().callEvent(event); //Run event
+    		                    	
+    		                    	if (event.isCancelled()) { //Make sure event is not called when cancelled
+    		                    		return;
+    		                    	}
+
     	                        killer.sendMessage(ChatColor.RED + plugin.messages.getString("Actions.MobKill.Chat-Alert-Message"));
     	                        return;
     		                   	} else {
@@ -160,6 +172,15 @@ public class MobKill implements Listener{
     	                        }
     	                    }
     	                    if (i==34) {
+    	                    	
+    	                    	PlayerReceiveAlertEvent event = new PlayerReceiveAlertEvent(killer);
+    	                    	
+    	                    	Bukkit.getServer().getPluginManager().callEvent(event); //Run event
+    	                    	
+    	                    	if (event.isCancelled()) { //Make sure event is not called when cancelled
+    	                    		return;
+    	                    	}
+    	                    	
     	                    	if (plugin.config.getBoolean("Title-Alert.Enabled")) {
     	                    		/*TitleManager.sendTimings(killer, 5, 30, 15);
     	                    		String raw2 = TellrawConverterLite.convertToJSON(ChatColor.RED + plugin.messages.getString("Actions.MobKill.Title-Alert-Message"));
@@ -205,6 +226,15 @@ public class MobKill implements Listener{
     	                    }
     	                    if (i==34) {
     	                    	if (plugin.config.getBoolean("Sound-Alert.Enabled")) {
+    	                    		
+    		                    	PlayerReceiveAlertEvent event = new PlayerReceiveAlertEvent(killer);
+    		                    	
+    		                    	Bukkit.getServer().getPluginManager().callEvent(event); //Run event
+    		                    	
+    		                    	if (event.isCancelled()) { //Make sure event is not called when cancelled
+    		                    		return;
+    		                    	}
+
     	                    		String sound = plugin.config.getString("Sound-Alert.Sound");
     	                    		Location loc = killer.getLocation();
     	                    		killer.getWorld().playSound(loc,Sound.valueOf(sound),1, 0);  

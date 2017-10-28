@@ -48,7 +48,7 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 			}
 			loadYamls();
 			
-			Metrics metrics = new Metrics(this);
+			new Metrics(this);
 		    
 	        getServer().getScheduler().runTaskLaterAsynchronously(this, new Runnable() {
 	            public void run() {
@@ -86,15 +86,12 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 					+ "If false, players won't get alerts by default. (So they have to do /if on if the want alerts)\n"
 					+ "Default-Alert-State: true"
 					+ "\n\n"
-					+ "Enable or disable particle alerts\n"
+					+ "Enable or disable particle alerts\n For a list of particle effects, please see: https://hub.spigotmc.org/javadocs/spigot/ \n"
 					+ "Particle-Effect:\n"
-					+ "Enabled: true\n\n"
+					+ "  Enabled: true\n"
+					+ "  Effect: FIREWORKS_SPARK\n\n"
 					+ "Choose whether a player should be able to break blocks when their inventory is full.\n"
 					+ "Disable-Block-Break-When-Full-Inv: false\n\n"
-					+ "Change what sound will be played when a full inventory.\n"
-					+ "For a list of sounds please see: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html\n"
-					+ "Sound-Alert-Sound: ENTITY_GHAST_HURT"
-					+ "\n\n"
 					+ "You can also send an message to the player when their inventory has a specific amount of full inventory slots.\n"
 					+ "The message will be: 'Your inventory is filled for ...%!'"
 					+ "You can change those amounts!\n"
@@ -133,6 +130,9 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 			}
 			if (!config.contains("Particle-Effect.Enabled")) {
 				config.set("Particle-Effect.Enabled", true);
+			}
+			if (!config.contains("Particle-Effect.Effect")) {
+				config.set("Particle-Effect.Effect", "FIREWORKS_SPARK");
 			}
 			if (!config.contains("Disable-Block-Break-When-Full-Inv")) {
 				config.set("Disable-Block-Break-When-Full-Inv", false);
