@@ -119,7 +119,11 @@ public class BlockBreak implements Listener{
 	            	        
 	                    	PlayerReceiveAlertEvent event = new PlayerReceiveAlertEvent(p);
 	                    	
-	                    	Bukkit.getServer().getPluginManager().callEvent(event);
+	                    	Bukkit.getServer().getPluginManager().callEvent(event); //Run event
+	                    	
+	                    	if (event.isCancelled()) { //Make sure event is not called when cancelled
+	                    		return;
+	                    	}
 	                    	
 	            	        if (plugin.config.getBoolean("Disable-Block-Break-When-Full-Inv") == true) {
 	            	        	e.setCancelled(true);
@@ -136,7 +140,7 @@ public class BlockBreak implements Listener{
 		                            
 		                            
 		                            //Compatible with all versions
-		                            loc.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, (float) (loc.getX() + (x + 0.5)), (float) (loc.getY() + y), (float) (loc.getZ() + (z + 0.5)), 0, 0, 0, 0, 1, null);
+		                            loc.getWorld().spawnParticle(Particle.valueOf(plugin.config.getString("Particle-Effect.Effect")), (float) (loc.getX() + (x + 0.5)), (float) (loc.getY() + y), (float) (loc.getZ() + (z + 0.5)), 0, 0, 0, 0, 1, null);
 	                            }
 	                        }
 	                    	

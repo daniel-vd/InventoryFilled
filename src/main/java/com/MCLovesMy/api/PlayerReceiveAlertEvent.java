@@ -20,7 +20,6 @@ public class PlayerReceiveAlertEvent extends Event implements Cancellable{
 	
 	public PlayerReceiveAlertEvent(Player player) {
 		super();
-		this.cancelled = false;
 		this.player = player;
 	}
 	
