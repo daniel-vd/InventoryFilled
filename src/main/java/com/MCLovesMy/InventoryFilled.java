@@ -166,9 +166,11 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 			messages.addDefault("Actions.BlockBreak.Chat-Alert-Message", "You can't pick this block up, your inventory is full!");
 			messages.addDefault("Actions.BlockBreak.Title-Alert-Message", "Inventory Full");
 			messages.addDefault("Actions.BlockBreak.SubTitle-Alert-Message", "You can't pick this block up");
+			messages.addDefault("Actions.BlockBreak.Partial-Filled-Alert", "Your inventory is filled for *percentage*%");
 			messages.addDefault("Actions.MobKill.Chat-Alert-Message", "You can't pick the mob drops up, your inventory is full!");
 			messages.addDefault("Actions.MobKill.Title-Alert-Message", "Inventory Full");
 			messages.addDefault("Actions.MobKill.SubTitle-Alert-Message", "You can't pick the mob drops up!");
+			messages.addDefault("Actions.MobKill.Partial-Filled-Alert", "Your inventory is filled for *percentage*%");
 			messages.options().copyDefaults(true).copyHeader(true);
 		}
 		

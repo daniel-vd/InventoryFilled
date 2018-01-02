@@ -50,12 +50,14 @@ public class BlockBreak implements Listener{
 			int invSlotsFull = 36 - count;
 			int invSlotsPercentFull = (int) (invPercent * invSlotsFull);
 			
-			String invSlotsFullPercent = invSlotsPercentFull + "%";
+			//Pretty unnecessary...
+			String invSlotsFullPercent = invSlotsPercentFull + "";
 			
 			//alert1
 	        if (invSlotsFull == (plugin.config.getInt("Inventory-Part-Alert.Alert1.Slots-Filled"))) {
 	        	if (!messageAlert1.contains(p.getName())) {
-                 p.sendMessage(ChatColor.BLUE + "Your inventory is filled for " + invSlotsFullPercent + "!");
+                 String message = ChatColor.BLUE + plugin.messages.getString("Actions.BlockBreak.Partial-Filled-Alert");
+                 p.sendMessage(message.replaceAll("\\*percentage\\*", invSlotsFullPercent));;
                  messageAlert1.add(p.getName());
 	        	}
 	        }
@@ -70,7 +72,8 @@ public class BlockBreak implements Listener{
 	        //alert2
 	        if (invSlotsFull == (plugin.config.getInt("Inventory-Part-Alert.Alert2.Slots-Filled"))) {
 	        	if (!messageAlert2.contains(p.getName())) {
-                 p.sendMessage(ChatColor.BLUE + "Your inventory is filled for " + invSlotsFullPercent + "!");
+	                 String message = ChatColor.BLUE + plugin.messages.getString("Actions.BlockBreak.Partial-Filled-Alert");
+	                 p.sendMessage(message.replaceAll("\\*percentage\\*", invSlotsFullPercent));;
                  messageAlert2.add(p.getName());
 	        	}
 	        }
@@ -85,7 +88,8 @@ public class BlockBreak implements Listener{
 	        //alert3
 	        if (invSlotsFull == (plugin.config.getInt("Inventory-Part-Alert.Alert3.Slots-Filled"))) {
 	        	if (!messageAlert3.contains(p.getName())) {
-                 p.sendMessage(ChatColor.BLUE + "Your inventory is filled for " + invSlotsFullPercent + "!");
+	                 String message = ChatColor.BLUE + plugin.messages.getString("Actions.BlockBreak.Partial-Filled-Alert");
+	                 p.sendMessage(message.replaceAll("\\*percentage\\*", invSlotsFullPercent));;
                  messageAlert3.add(p.getName());
 	        	}
 	        }
@@ -100,7 +104,8 @@ public class BlockBreak implements Listener{
 	        //alert4
 	        if (invSlotsFull == (plugin.config.getInt("Inventory-Part-Alert.Alert4.Slots-Filled"))) {
 	        	if (!messageAlert4.contains(p.getName())) {
-                 p.sendMessage(ChatColor.BLUE + "Your inventory is filled for " + invSlotsFullPercent + "!");
+	                 String message = ChatColor.BLUE + plugin.messages.getString("Actions.BlockBreak.Partial-Filled-Alert");
+	                 p.sendMessage(message.replaceAll("\\*percentage\\*", invSlotsFullPercent));
                  messageAlert4.add(p.getName());
 	        	}
 	        }
