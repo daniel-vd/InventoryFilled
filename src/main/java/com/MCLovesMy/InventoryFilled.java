@@ -55,7 +55,7 @@ public class InventoryFilled extends JavaPlugin implements CommandExecutor {
 	            	console.sendMessage(ChatColor.BLUE + "============================================");
 	            	console.sendMessage(ChatColor.GREEN + "[InventoryFilled]");
 	            	console.sendMessage(ChatColor.GREEN + "InventoryFilled loaded succesfully!");
-	                checkUpdate();
+	                //checkUpdate(); Disabled because broken temporarily.
 	        	    console.sendMessage(ChatColor.BLUE + "============================================");
 	            }
 	        }, 20L);

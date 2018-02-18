@@ -14,10 +14,10 @@ public class Updater {
 	
 		private JavaPlugin plugin;
 	    private final String API_KEY = "98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4";
-	    private final String REQUEST_METHOD = "POST";
+	    private final String REQUEST_METHOD = "GET";
 	    private String RESOURCE_ID = "";
 	    private final String HOST = "http://www.spigotmc.org";
-	    private final String QUERY = "/api/general.php";
+	    private final String QUERY = "/legacy/update.php";
 	    private String WRITE_STRING;
 	    
 	    private String version;
@@ -54,7 +54,7 @@ public class Updater {
 	            return;
 	        }
 
-	        WRITE_STRING = "key=" + API_KEY + "&resource=" + RESOURCE_ID;
+	        WRITE_STRING = "?resource="+RESOURCE_ID;
 	        run();
 	    }
 	   
